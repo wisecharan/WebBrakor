@@ -1,20 +1,21 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  // Add proper type for menuRef
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const location = useLocation();
 
   const navItems = [
     { to: '/about', label: 'About Us' },
     { to: '/pricing', label: 'Plans & Pricing' },
     { to: '/reviews', label: 'Success Stories' },
-    { to: '/waitlist', label: 'Early Access' },
-    { to: '/contact', label: 'Get in Touch' },
+    { to: '/waitlist', label: 'Waitlist' },
+    { to: '/contact', label: 'Contact' },
   ];
+
+  const fullNavItems = navItems;
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 0);
@@ -23,17 +24,25 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    // Type event properly
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setIsMobileMenuOpen(false);
       }
     };
-
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') setIsMobileMenuOpen(false);
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('keydown', handleEscape);
     return () => {
@@ -50,17 +59,16 @@ export default function Header() {
         isScrolled ? 'bg-white/80 backdrop-blur-md border-b border-gray-200' : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative flex items-center h-16">
-        {/* Logo Left */}
-        <div className="flex-shrink-0 text-left">
-          <Link to="/" onClick={handleLinkClick}>
-            <span className="text-xl font-bold text-gray-900">WebRakor</span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-16 relative">
+        <div className="flex-shrink-0">
+          <Link to="/" onClick={handleLinkClick} className="text-xl font-bold text-gray-900">
+            Webrakor
           </Link>
         </div>
 
-        {/* Desktop Nav Center */}
+        {/* Desktop Nav */}
         <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 space-x-6">
-          {navItems.map((item) => (
+          {fullNavItems.map((item) => (
             <Link
               key={item.to}
               to={item.to}
@@ -72,8 +80,8 @@ export default function Header() {
           ))}
         </div>
 
-        {/* Desktop CTA Right */}
-        <div className="hidden md:flex items-center ml-auto">
+        {/* Desktop CTA */}
+        <div className="hidden md:flex ml-auto">
           <Link to="/contact" onClick={handleLinkClick}>
             <button className="bg-black text-white px-3 py-1 rounded-full font-medium hover:bg-gray-800 transition-colors text-sm">
               Go Live
@@ -81,57 +89,88 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Hamburger Right (Mobile) */}
+        {/* Mobile Hamburger Menu Button */}
         <button
-          className="md:hidden ml-auto flex flex-col justify-between w-5 h-5 p-1"
+          className="md:hidden ml-auto w-10 h-8 p-1 flex items-center justify-center bg-black rounded-lg"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
           aria-expanded={isMobileMenuOpen}
         >
-          <span
-            className={`block h-0.5 w-full bg-black rounded transition-transform duration-300 ${
-              isMobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''
-            }`}
-          />
-          <span
-            className={`block h-0.5 w-full bg-black rounded transition-opacity duration-300 ${
-              isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
-            }`}
-          />
-          <span
-            className={`block h-0.5 w-full bg-black rounded transition-transform duration-300 ${
-              isMobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''
-            }`}
-          />
+          {isMobileMenuOpen ? (
+            <svg
+              className="w-6 h-6 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          ) : (
+            <svg
+              className="w-6 h-6 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          )}
         </button>
       </div>
 
-      {/* Mobile Minimal Menu Box */}
+      {/* Mobile Fullscreen Menu with right-side animation */}
       <div
-        className={`absolute top-16 right-4 z-40 bg-white shadow-md rounded-md transform transition-transform duration-300 ${
-          isMobileMenuOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'
+        className={`fixed inset-0 z-40 transition-all duration-300 ${
+          isMobileMenuOpen ? 'bg-black/50' : 'bg-transparent pointer-events-none'
         }`}
-        ref={menuRef}
-        style={{ minWidth: '200px', maxWidth: '220px' }}
+        onClick={() => setIsMobileMenuOpen(false)}
       >
-        <nav className="flex flex-col p-3 space-y-2 text-sm">
-          {navItems.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              onClick={handleLinkClick}
-              className="text-gray-800 hover:text-gray-900 transition-colors"
-            >
-              {item.label}
+        <div
+          ref={menuRef}
+          className={`fixed top-0 right-0 h-full w-3/4 max-w-sm bg-white p-6 shadow-lg transform transition-transform duration-300 ${
+            isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="flex justify-between items-center mb-8">
+            <Link to="/" onClick={handleLinkClick}>
+              <h1 className="text-xl font-bold text-gray-900">Webrakor</h1>
             </Link>
-          ))}
-
-          <Link to="/contact" onClick={handleLinkClick}>
-            <button className="mt-2 w-full bg-black text-white py-1 rounded-full font-medium hover:bg-gray-800 transition-colors text-sm">
-              Go Live
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="w-10 h-10 bg-black rounded-lg flex items-center justify-center text-white text-lg font-bold"
+            >
+              ✕
             </button>
-          </Link>
-        </nav>
+          </div>
+
+          <nav className="flex flex-col space-y-2">
+            {navItems.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                onClick={handleLinkClick}
+                className={`block text-gray-800 hover:text-gray-900 font-medium transition-colors p-3 rounded-lg ${
+                  location.pathname === item.to ? 'bg-gray-100' : ''
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
       </div>
     </header>
   );

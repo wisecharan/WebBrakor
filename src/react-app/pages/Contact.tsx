@@ -8,7 +8,7 @@ export default function Contact() {
       <Header />
       <main className="pt-24 pb-14 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          
+
           {/* Hero Section */}
           <div className="text-center mb-12 sm:mb-16">
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-3 sm:mb-4">
@@ -23,7 +23,7 @@ export default function Contact() {
           <div className="max-w-6xl mx-auto bg-white rounded-2xl sm:rounded-3xl shadow-md sm:shadow-xl overflow-hidden border border-gray-100">
             {/* On mobile: flex-col-reverse so form is first */}
             <div className="flex flex-col-reverse lg:grid lg:grid-cols-2">
-              
+
               {/* Contact Info Side */}
               <div className="bg-gradient-to-br from-gray-50 to-[#f7fcf0] p-6 sm:p-10 md:p-12">
                 <div className="mb-6 sm:mb-10">
@@ -75,13 +75,13 @@ export default function Contact() {
                     { id: "phone", label: "Phone Number", type: "tel" }
                   ].map((field, i) => (
                     <div className="relative" key={i}>
-                      <input 
-                        type={field.type} 
+                      <input
+                        type={field.type}
                         id={field.id}
                         className="peer h-10 sm:h-12 w-full border-b-2 border-gray-200 text-gray-900 placeholder-transparent focus:outline-none focus:border-[#c1f174]"
                         placeholder=" "
                       />
-                      <label 
+                      <label
                         htmlFor={field.id}
                         className="absolute left-0 -top-3.5 text-gray-600 text-xs sm:text-sm transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-[#c1f174]"
                       >
@@ -91,13 +91,13 @@ export default function Contact() {
                   ))}
 
                   <div className="relative pt-3">
-                    <textarea 
+                    <textarea
                       id="message"
                       rows={3}
                       className="peer w-full border-b-2 border-gray-200 text-gray-900 placeholder-transparent focus:outline-none focus:border-[#c1f174] resize-none"
                       placeholder=" "
                     />
-                    <label 
+                    <label
                       htmlFor="message"
                       className="absolute left-0 -top-3.5 text-gray-600 text-xs sm:text-sm transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-[#c1f174]"
                     >
@@ -119,6 +119,59 @@ export default function Contact() {
             </div>
           </div>
         </div>
+        {/* FAQ Section */}
+        <div className="max-w-4xl mx-auto mt-16 px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-8">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="border-t border-gray-200 divide-y divide-gray-200">
+            {
+              [
+                {
+                  question: "How quickly can I get my website live?",
+                  answer: "WebRakor provides production-ready websites, so you can have a fully functional site live within days, depending on customization needs."
+                },
+                {
+                  question: "Can I customize the website after it’s delivered?",
+                  answer: "Yes! You can easily update content, images, and design elements, or request additional customizations from our team."
+                },
+                {
+                  question: "Are the websites mobile-friendly and responsive?",
+                  answer: "Absolutely. All WebRakor websites are optimized for desktop, tablet, and mobile devices out of the box."
+                },
+                {
+                  question: "Do you provide SEO optimization?",
+                  answer: "Yes. Every website is built with SEO best practices, ensuring your business is discoverable on search engines."
+                },
+                {
+                  question: "What kind of support do I get after my website is live?",
+                  answer: "We offer ongoing support, including updates, bug fixes, and guidance to help you maintain and grow your site."
+                },
+                {
+                  question: "Can I integrate e-commerce features into my website?",
+                  answer: "Definitely! We can set up online stores, payment gateways, and product management systems tailored to your business needs."
+                }
+              ]
+                .map((faq, index) => (
+                  <details key={index} className="group">
+                    <summary className="flex justify-between items-center cursor-pointer py-4 text-gray-900 font-medium text-base sm:text-lg">
+                      {faq.question}
+                      <svg
+                        className="ml-2 w-5 h-5 text-gray-400 transition-transform duration-200 group-open:rotate-180"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </summary>
+                    <p className="pb-4 text-gray-700 text-sm sm:text-base">{faq.answer}</p>
+                  </details>
+                ))}
+          </div>
+        </div>
+
       </main>
       <Footer />
     </div>

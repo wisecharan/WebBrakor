@@ -12,45 +12,45 @@ export default function PricingSection() {
 
   const plans = [
     {
-      name: 'Basic',
+      name: 'Starter',
       price: { monthly: 9, yearly: 90 },
-      description: 'Perfect for small businesses starting with AI tools.',
+      description: 'The perfect plan for individuals and small teams to get started with AI.',
       features: [
-        { name: 'API Access', included: true },
-        { name: 'Basic Analytics', included: true },
+        { name: 'AI Website Builder', included: true },
+        { name: 'Core Design Features', included: true },
+        { name: 'Standard Analytics', included: true },
         { name: 'Email Support', included: true },
-        { name: 'Data Integration', included: true },
-        { name: 'Real-Time Sync', included: true },
-        { name: 'Centralized Dashboard', included: true },
+        { name: 'AI Content Generation', included: true },
+        { name: 'Integrated Hosting', included: true },
         { name: 'Advanced Reporting', included: false },
-        { name: 'Priority Support', included: false },
-        { name: 'Campaign Automation (Full)', included: false },
-        { name: 'Predictive Analytics', included: false },
-        { name: 'Premium Support', included: false },
-        { name: 'Customizable Workflows', included: false }
+        { name: 'Dedicated Account Manager', included: false },
+        { name: 'Full Marketing Automation', included: false },
+        { name: 'Predictive Growth Insights', included: false },
+        { name: '24/7 Priority Support', included: false },
+        { name: 'Custom AI Workflows', included: false }
       ],
       cta: 'Start Free Trial',
       popular: false
     },
     {
-      name: 'Pro',
+      name: 'Growth',
       price: { monthly: 29, yearly: 290 },
-      description: 'For growing teams needing advanced features.',
+      description: 'Unlock advanced tools to scale your business and automate your online presence.',
       features: [
-        { name: 'API Access', included: true },
-        { name: 'Advanced Analytics', included: true },
+        { name: 'AI Website Builder', included: true },
+        { name: 'Advanced Design Features', included: true },
+        { name: 'In-depth Analytics', included: true },
         { name: 'Priority Support', included: true },
-        { name: 'Data Integration', included: true },
-        { name: 'Real-Time Sync', included: true },
-        { name: 'Centralized Dashboard', included: true },
+        { name: 'AI Content Generation', included: true },
+        { name: 'Integrated Hosting', included: true },
         { name: 'Advanced Reporting', included: true },
         { name: 'Email, Chat & Phone Support', included: true },
-        { name: 'CRM Integration', included: true },
+        { name: 'AI SEO & Marketing Tools', included: true },
         { name: 'Social Media Integration', included: true },
-        { name: 'Campaign Automation (Full)', included: true },
-        { name: 'Predictive Analytics', included: true },
-        { name: 'Premium Support', included: false },
-        { name: 'Customizable Workflows', included: false }
+        { name: 'Full Marketing Automation', included: true },
+        { name: 'Predictive Growth Insights', included: true },
+        { name: '24/7 Priority Support', included: false },
+        { name: 'Custom AI Workflows', included: false }
       ],
       cta: 'Start Free Trial',
       popular: true
@@ -58,53 +58,53 @@ export default function PricingSection() {
     {
       name: 'Enterprise',
       price: { monthly: 79, yearly: 790 },
-      description: 'For enterprises needing full AI solutions.',
+      description: 'Comprehensive, end-to-end solutions for enterprises with complex needs.',
       features: [
-        { name: 'API Access', included: true },
-        { name: 'Enterprise Analytics', included: true },
-        { name: 'Premium Support', included: true },
-        { name: 'Data Integration', included: true },
-        { name: 'Real-Time Sync', included: true },
-        { name: 'Centralized Dashboard', included: true },
+        { name: 'AI Website Builder', included: true },
+        { name: 'Custom Design & Branding', included: true },
+        { name: 'In-depth Analytics', included: true },
+        { name: '24/7 Priority Support', included: true },
+        { name: 'AI Content Generation', included: true },
+        { name: 'Integrated Hosting', included: true },
         { name: 'Advanced Reporting', included: true },
         { name: 'Email, Chat & Phone Support', included: true },
-        { name: 'CRM Integration', included: true },
+        { name: 'AI SEO & Marketing Tools', included: true },
         { name: 'Social Media Integration', included: true },
-        { name: 'Campaign Automation (Full)', included: true },
-        { name: 'Predictive Analytics', included: true },
-        { name: 'Premium Support', included: true },
-        { name: 'Customizable Workflows', included: true }
+        { name: 'Full Marketing Automation', included: true },
+        { name: 'Predictive Growth Insights', included: true },
+        { name: 'Dedicated Account Manager', included: true },
+        { name: 'Custom AI Workflows', included: true }
       ],
-      cta: 'Start Free Trial',
+      cta: 'Contact Sales',
       popular: false
     }
   ];
 
   const faqQuestions = [
     {
-      question: 'What’s included in each plan?',
+      question: 'What makes a WebRakor site "AI-powered"?',
       answer:
-        'Every plan includes core AI features. Higher tiers unlock more tools and support.'
+        'Our platform uses artificial intelligence to assist with every step of the process, from generating initial design concepts to writing engaging content and optimizing your site for search engines. This ensures a fast, high-quality, and data-driven result.'
     },
     {
-      question: 'Can I switch billing anytime?',
+      question: 'Can I switch or cancel my plan at any time?',
       answer:
-        'Yes. Switching is easy. Yearly plans offer up to 50% savings.'
+        'Yes, you can easily upgrade, downgrade, or cancel your plan at any time from your dashboard. There are no long-term contracts or hidden fees. We believe in providing flexibility to match your business needs.'
     },
     {
       question: 'Do you offer a free trial?',
       answer:
-        'Yes. All plans include a free trial to explore features.'
+        'Yes, all of our plans include a free trial. You can explore our platform and experience the power of our AI tools before committing to a subscription.'
     },
     {
-      question: 'How does support work?',
+      question: 'What kind of support is included?',
       answer:
-        'Basic gets email support. Pro & Enterprise include chat, phone, and priority help.'
+        'Our Starter plan includes email support. The Growth and Enterprise plans come with priority support via email, chat, and phone, giving you faster access to our expert team whenever you need it.'
     },
     {
-      question: 'Can I cancel anytime?',
+      question: 'Is WebRakor suitable for large enterprises?',
       answer:
-        'Yes. Cancel anytime without extra fees.'
+        'Absolutely. Our Enterprise plan is designed for large organizations, offering advanced features like dedicated support, custom integrations, and scalable solutions tailored to meet complex business requirements.'
     }
   ];
 
@@ -113,18 +113,19 @@ export default function PricingSection() {
   };
 
   return (
-    <section className="py-10 px-4 sm:px-6 lg:px-8" id="pricing">
-      <div className="max-w-sm sm:max-w-7xl mx-auto">
+    <section className="py-8 px-4 sm:px-6 lg:px-8" id="pricing">
+      {/* Changed max-w-sm to max-w-xs for mobile */}
+      <div className="max-w-xs sm:max-w-5xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-14 sm:mb-20">
+        <div className="text-center mb-10 sm:mb-16">
           <div className="text-xs sm:text-sm font-semibold text-gray-500 tracking-wider uppercase mb-3 sm:mb-4">
-            PRICING PLANS
+            AFFORDABLE PLANS
           </div>
-          <h2 className="text-3xl sm:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
-            Plans for Every Stage
+          <h2 className="text-3xl sm:text-6xl font-bold text-gray-900 mb-6">
+            Find the Perfect <br />Plan to Grow.
           </h2>
-          <p className="text-sm sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto">
-            Choose the right plan and start using our AI tools today.
+          <p className="text-sm sm:text-lg text-gray-600 mb-4 max-w-2xl mx-auto">
+            Choose a plan that fits your business needs and start building your AI-powered website today.
           </p>
 
           {/* Pricing & Currency Toggle */}
@@ -174,11 +175,11 @@ export default function PricingSection() {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`relative rounded-2xl sm:rounded-3xl p-6 sm:p-8 border-2 transition-all ${
+              className={`relative rounded-2xl sm:rounded-3xl p-5 sm:p-7 border-2 transition-all ${
                 plan.popular
                   ? 'border-[#c6f678] bg-black text-[#c6f678] transform scale-105'
                   : 'border-gray-200 bg-white hover:border-gray-300'
@@ -203,7 +204,7 @@ export default function PricingSection() {
                   {plan.name}
                 </h3>
                 <div className="flex items-baseline mb-3 sm:mb-4">
-                  <span className="text-3xl sm:text-5xl font-bold">
+                  <span className="text-3xl sm:text-4xl font-bold">
                     {formatPrice(
                       isYearly ? plan.price.yearly : plan.price.monthly
                     )}
@@ -237,7 +238,7 @@ export default function PricingSection() {
                           className={`w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 ${
                             plan.popular
                               ? 'text-[#c6f678]'
-                              : 'text-[#c6f678]'
+                              : 'text-[#a3e635]'
                           }`}
                         />
                       ) : (
@@ -267,9 +268,9 @@ export default function PricingSection() {
                 </ul>
               </div>
 
-              {/* CTA Button */}
+              {/* CTA Button - Added mobile-specific styling */}
               <button
-                className={`w-full py-3 sm:py-4 rounded-full font-semibold transition-colors text-sm sm:text-base ${
+                className={`w-full py-2 sm:py-4 rounded-full font-semibold transition-colors text-xs sm:text-base ${
                   plan.popular
                     ? 'bg-[#c6f678] text-black hover:bg-[#b8f566]'
                     : 'bg-black text-white hover:bg-gray-800'
@@ -286,9 +287,9 @@ export default function PricingSection() {
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-10 text-center">
             Frequently Asked Questions
           </h2>
-          <div className="space-y-4 sm:space-y-6">
+          <div className="space-y-3 sm:space-y-4">
             {faqQuestions.map((faq, index) => (
-              <div key={index} className="border-b border-gray-200 pb-4 sm:pb-6">
+              <div key={index} className="border-b border-gray-200 pb-4">
                 <button
                   className="w-full flex justify-between items-center text-left text-base sm:text-lg font-medium text-gray-900"
                   onClick={() => toggleFaq(index)}
@@ -309,7 +310,6 @@ export default function PricingSection() {
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );
