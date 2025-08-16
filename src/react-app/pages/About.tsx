@@ -78,9 +78,9 @@ export default function About() {
               <AnimatedSection delay={200}>
                 <div className="flex justify-center mb-4">
                   <div className="flex -space-x-3">
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile 1" className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-white object-cover max-w-full h-auto" />
-                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Profile 2" className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-white object-cover max-w-full h-auto" />
-                    <img src="https://randomuser.me/api/portraits/women/30.jpg" alt="Profile 3" className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-white object-cover max-w-full h-auto" />
+                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQF702Z9DrxliQ/profile-displayphoto-shrink_400_400/B4DZaMjmAgHQAg-/0/1746114869141?e=1758153600&v=beta&t=QtUJnB_7u8RauVTqFBmD2DkYsm9a-9mc_KJG41sQZaY" alt="Profile 1" className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-white object-cover max-w-full h-auto" />
+                    <img src="https://media.licdn.com/dms/image/v2/D5603AQG0t2EJOna3Sw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1728107387117?e=1758153600&v=beta&t=Gn3pPbT38DjtMVG6ZjevNVFQ7nxMSWhsfSWwBaly4Dg" alt="Profile 2" className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-white object-cover max-w-full h-auto" />
+                    <img src="https://media.licdn.com/dms/image/v2/D5603AQFgsD-HFjjSRw/profile-displayphoto-shrink_400_400/B56Zb4s1p_HwAo-/0/1747929227438?e=1758153600&v=beta&t=7U6HSJPuwYDA64r2oahAhdZHMF5eyicJ3WDhZ-BezU0" alt="Profile 3" className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-white object-cover max-w-full h-auto" />
                   </div>
                 </div>
               </AnimatedSection>
