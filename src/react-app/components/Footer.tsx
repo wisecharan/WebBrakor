@@ -10,10 +10,9 @@ export default function Footer() {
       { name: 'Contact', href: '/contact' }
     ],
     social: [
-      { name: 'LinkedIn', href: '#' },
-      { name: 'Instagram', href: '#' },
-      { name: 'Youtube', href: '#' },
-      { name: 'Github', href: '#' },
+      {name: 'LinkedIn',href: 'https://www.linkedin.com/in/wisecharan/',target: '_blank', rel: 'noopener noreferrer'},
+      { name: 'Instagram', href: 'https://www.instagram.com/webrakor/', target: '_blank', rel: 'noopener noreferrer' },
+      { name: 'Github', href: 'https://github.com/wisecharan', target: '_blank', rel: 'noopener noreferrer' },
     ]
   };
 
@@ -32,7 +31,10 @@ export default function Footer() {
               <ul className="space-y-2">
                 {footerLinks.company.map((link, index) => (
                   <li key={index}>
-                    <Link to={link.href} className="text-gray-400 hover:text-[#c6f678] transition-colors">
+                    <Link
+                      to={link.href}
+                      className="text-gray-400 hover:text-[#c6f678] transition-colors"
+                    >
                       {link.name}
                     </Link>
                   </li>
@@ -46,7 +48,12 @@ export default function Footer() {
               <ul className="space-y-2">
                 {footerLinks.social.map((link, index) => (
                   <li key={index}>
-                    <a href={link.href} className="text-gray-400 hover:text-[#c6f678] transition-colors">
+                    <a
+                      href={link.href}
+                      target={link.target || '_self'}
+                      rel={link.rel || undefined}
+                      className="text-gray-400 hover:text-[#c6f678] transition-colors"
+                    >
                       {link.name}
                     </a>
                   </li>
@@ -103,4 +110,3 @@ export default function Footer() {
     </footer>
   );
 }
-  

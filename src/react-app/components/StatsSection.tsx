@@ -1,3 +1,93 @@
+import { useEffect, useRef, useState, ReactNode, FC } from 'react';
+
+// Animation utility function
+const animateOnScroll = (element: HTMLElement | null, delay: number = 0) => {
+  if (element) {
+    element.style.transition = `opacity 600ms ease-out ${delay}ms, transform 600ms ease-out ${delay}ms`;
+    element.style.opacity = '1';
+    element.style.transform = 'translateY(0)';
+  }
+};
+
+// Component wrapper with animation
+interface AnimatedSectionProps {
+  children: ReactNode;
+  delay?: number;
+}
+
+const AnimatedSection: FC<AnimatedSectionProps> = ({ children, delay = 0 }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateOnScroll(entry.target as HTMLElement, delay);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [delay]);
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        opacity: 0,
+        transform: 'translateY(20px)',
+        willChange: 'opacity, transform',
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
+// Counter component for animated numbers
+interface CounterProps {
+  value: string;
+  duration?: number;
+}
+
+const Counter = ({ value, duration = 2000 }: CounterProps) => {
+  const [count, setCount] = useState(0);
+  const numValue = parseFloat(value.replace(/[^0-9.]/g, ''));
+  const suffix = value.replace(/[0-9.]/g, '');
+
+  useEffect(() => {
+    let start = 0;
+    const end = numValue;
+    const incrementTime = duration / end;
+
+    const timer = setInterval(() => {
+      start += 1;
+      setCount(start);
+      if (start >= end) clearInterval(timer);
+    }, incrementTime);
+
+    return () => clearInterval(timer);
+  }, [numValue, duration]);
+
+  return (
+    <>
+      {count.toLocaleString()}
+      {suffix && <span className="text-[#a3e635]">{suffix}</span>}
+    </>
+  );
+};
+
 export default function StatsSection() {
   const stats = [
     {
@@ -8,14 +98,14 @@ export default function StatsSection() {
         'We have empowered businesses of all sizes to launch stunning, high-performance websites with speed and precision.',
     },
     {
-      number: '1,000+',
+      number: '1000+',
       highlight: '+',
       title: 'Successful Projects',
       subtitle:
         'Our AI has assisted in thousands of projects, combining efficiency with human creativity to deliver exceptional results.',
     },
     {
-      number: '10M',
+      number: '10M+',
       highlight: '+',
       title: 'Lines of Code Written',
       subtitle:
@@ -26,32 +116,43 @@ export default function StatsSection() {
   return (
     <section className="pt-0 pb-10 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
-        
         {/* Heading */}
-        <div className="text-center mb-8 sm:mb-10">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-            Focus on your business.<br />We'll build your website.
-          </h2>
-          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto mt-4">
-            Experience AI-powered speed and human-crafted quality, making web development simpler than ever.
-          </p>
-        </div>
+        <AnimatedSection>
+          <div className="text-center mb-8 sm:mb-10">
+            <AnimatedSection delay={100}>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                Focus on your business.<br />
+                We'll build your website.
+              </h2>
+            </AnimatedSection>
+            <AnimatedSection delay={200}>
+              <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto mt-4">
+                Experience AI-powered speed and human-crafted quality, making web development simpler than ever.
+              </p>
+            </AnimatedSection>
+          </div>
+        </AnimatedSection>
 
         {/* Statistics Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-6 lg:gap-12">
           {stats.map((stat, index) => (
-            <div key={index} className="text-center px-2 sm:px-4">
-              <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-1 sm:mb-3">
-                {stat.number.replace(stat.highlight, '')}
-                <span className="text-[#a3e635]">{stat.highlight}</span>
+            <AnimatedSection key={index} delay={index * 150}>
+              <div className="text-center px-2 sm:px-4">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-1 sm:mb-3">
+                  <Counter value={stat.number} />
+                </div>
+                <AnimatedSection delay={300}>
+                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-black mb-1 sm:mb-2">
+                    {stat.title}
+                  </h3>
+                </AnimatedSection>
+                <AnimatedSection delay={400}>
+                  <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-snug sm:leading-relaxed">
+                    {stat.subtitle}
+                  </p>
+                </AnimatedSection>
               </div>
-              <h3 className="text-base sm:text-lg md:text-xl font-bold text-black mb-1 sm:mb-2">
-                {stat.title}
-              </h3>
-              <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-snug sm:leading-relaxed">
-                {stat.subtitle}
-              </p>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
       </div>

@@ -1,177 +1,174 @@
-import { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { ChevronUp } from "lucide-react"; // scroll-to-top icon
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
 
   const navItems = [
-    { to: '/about', label: 'About Us' },
-    { to: '/pricing', label: 'Plans & Pricing' },
-    { to: '/reviews', label: 'Success Stories' },
-    { to: '/waitlist', label: 'Waitlist' },
-    { to: '/contact', label: 'Contact' },
+    { to: "/about", label: "About Us" },
+    { to: "/pricing", label: "Plans & Pricing" },
+    { to: "/reviews", label: "Success Stories" },
+    { to: "/waitlist", label: "Waitlist" },
+    { to: "/contact", label: "Contact" },
   ];
 
-  const fullNavItems = navItems;
-
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 0);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [isMobileMenuOpen]);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setIsMobileMenuOpen(false);
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('keydown', handleEscape);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, []);
-
   const handleLinkClick = () => setIsMobileMenuOpen(false);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/80 backdrop-blur-md border-b border-gray-200' : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-16 relative">
-        <div className="flex-shrink-0">
-          <Link to="/" onClick={handleLinkClick} className="text-xl font-bold text-gray-900">
-            Webrakor
-          </Link>
-        </div>
-
-        {/* Desktop Nav */}
-        <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 space-x-6">
-          {fullNavItems.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              onClick={handleLinkClick}
-              className="text-gray-700 hover:text-gray-900 font-medium transition-colors text-sm"
-            >
-              {item.label}
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? "bg-white border-b border-gray-200 shadow-sm"
+            : "bg-white"
+        }`}
+      >
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-16 relative">
+          <div className="flex-shrink-0 mr-auto">
+            <Link to="/" onClick={handleLinkClick} className="flex items-center">
+              <img src="/LOGO.png" alt="Company Logo" className="h-5 w-auto" />
+              <span className="ml-2 text-xl font-bold text-gray-900">
+                Webrakor
+              </span>
             </Link>
-          ))}
-        </div>
+          </div>
 
-        {/* Desktop CTA */}
-        <div className="hidden md:flex ml-auto">
-          <Link to="/contact" onClick={handleLinkClick}>
-            <button className="bg-black text-white px-3 py-1 rounded-full font-medium hover:bg-gray-800 transition-colors text-sm">
-              Go Live
-            </button>
-          </Link>
-        </div>
+          {/* Desktop Nav*/}
+          <div className="hidden md:flex flex-1 justify-center space-x-6">
+            {navItems.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                onClick={handleLinkClick}
+                className={`text-gray-700 hover:text-gray-900 font-medium transition-colors text-sm ${
+                  location.pathname === item.to ? "font-semibold" : ""
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
 
-        {/* Mobile Hamburger Menu Button */}
-        <button
-          className="md:hidden ml-auto w-10 h-8 p-1 flex items-center justify-center bg-black rounded-lg"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
-          aria-expanded={isMobileMenuOpen}
-        >
-          {isMobileMenuOpen ? (
+          {/* Desktop CTA - Hidden */}
+          <div className="hidden md:flex ml-auto">
+            <Link to="/contact" onClick={handleLinkClick}>
+              <button className="bg-black text-white px-3 py-1 rounded-full font-medium hover:bg-gray-800 transition-colors text-sm">
+                Go Live
+              </button>
+            </Link>
+          </div>
+
+          {/* Mobile Hamburger Menu - Hidden  */}
+          <button
+            className="md:hidden ml-auto w-10 h-8 p-1 flex items-center justify-center bg-black rounded-lg"
+            onClick={() => setIsMobileMenuOpen(true)}
+            aria-label="Open menu"
+          >
             <svg
               className="w-6 h-6 text-white"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              ></path>
-            </svg>
-          ) : (
-            <svg
-              className="w-6 h-6 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M4 6h16M4 12h16M4 18h16"
-              ></path>
+              />
             </svg>
-          )}
-        </button>
-      </div>
-
-      {/* Mobile Fullscreen Menu with right-side animation */}
-      <div
-        className={`fixed inset-0 z-40 transition-all duration-300 ${
-          isMobileMenuOpen ? 'bg-black/50' : 'bg-transparent pointer-events-none'
-        }`}
-        onClick={() => setIsMobileMenuOpen(false)}
-      >
-        <div
-          ref={menuRef}
-          className={`fixed top-0 right-0 h-full w-3/4 max-w-sm bg-white p-6 shadow-lg transform transition-transform duration-300 ${
-            isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="flex justify-between items-center mb-8">
-            <Link to="/" onClick={handleLinkClick}>
-              <h1 className="text-xl font-bold text-gray-900">Webrakor</h1>
-            </Link>
-            <button
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="w-10 h-10 bg-black rounded-lg flex items-center justify-center text-white text-lg font-bold"
-            >
-              ✕
-            </button>
-          </div>
-
-          <nav className="flex flex-col space-y-2">
-            {navItems.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                onClick={handleLinkClick}
-                className={`block text-gray-800 hover:text-gray-900 font-medium transition-colors p-3 rounded-lg ${
-                  location.pathname === item.to ? 'bg-gray-100' : ''
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+          </button>
         </div>
-      </div>
-    </header>
+
+        {/* Mobile Menu - Hidden (since you only want logo) */}
+        <div
+          className={`fixed inset-0 z-[60] flex transition-opacity duration-300 ${
+            isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
+        >
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          <div
+            ref={menuRef}
+            className={`relative ml-auto h-full w-3/4 max-w-sm bg-white p-6 shadow-xl transform transition-transform duration-300 ease-in-out z-[70] ${
+              isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+            }`}
+          >
+            <div className="flex justify-between items-center mb-8">
+              <Link
+                to="/"
+                onClick={handleLinkClick}
+                className="flex items-center space-x-2"
+              >
+                <img src="/LOGO.png" alt="Company Logo" className="h-6 w-auto" />
+                <span className="text-xl font-bold text-gray-900">
+                  Webrakor
+                </span>
+              </Link>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-10 h-10 bg-black rounded-lg flex items-center justify-center text-white text-lg font-bold"
+              >
+                ✕
+              </button>
+            </div>
+            <nav className="flex flex-col space-y-2">
+              {navItems.map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  onClick={handleLinkClick}
+                  className={`block text-gray-800 hover:text-gray-900 font-medium transition-colors p-3 rounded-lg ${
+                    location.pathname === item.to ? "bg-gray-100" : ""
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      {/* Scroll-to-top button - Keeping this as it's not part of the header */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-6 right-6 z-50 w-10 h-10 flex items-center justify-center rounded-full bg-black text-white shadow-md hover:bg-gray-800 transition duration-300 transform
+        ${showScrollTop ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}`}
+        aria-label="Scroll to top"
+      >
+        <ChevronUp size={20} />
+      </button>
+    </>
   );
 }
