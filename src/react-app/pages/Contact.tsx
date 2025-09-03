@@ -3,12 +3,11 @@ import Footer from '@/react-app/components/Footer';
 import { Mail, Phone, Instagram, Linkedin, MapPin } from 'lucide-react';
 import React, { useEffect, useRef, ReactNode } from 'react';
 
-
 export default function Contact() {
-  // Animation utility
+  // Faster & minimal animation utility
   const animateOnScroll = (element: HTMLElement | null, delay: number = 0): void => {
     if (element) {
-      element.style.transition = `opacity 700ms ease-out ${delay}ms, transform 700ms ease-out ${delay}ms`;
+      element.style.transition = `opacity 400ms ease-out ${delay}ms, transform 400ms ease-out ${delay}ms`;
       element.style.opacity = '1';
       element.style.transform = 'translateY(0)';
     }
@@ -51,7 +50,7 @@ export default function Contact() {
         ref={ref}
         style={{
           opacity: 0,
-          transform: 'translateY(30px)',
+          transform: 'translateY(15px)', // reduced movement
           willChange: 'opacity, transform'
         }}
       >
@@ -67,7 +66,7 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto">
           {/* Hero Section */}
           <AnimatedSection>
-             <div className="text-center mb-16 sm:mb-20"> 
+            <div className="text-center mb-16 sm:mb-20"> 
               <AnimatedSection delay={100}>
                 <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-3 sm:mb-4">
                   Let's Connect
@@ -98,9 +97,9 @@ export default function Contact() {
                   {/* Contact Methods */}
                   <div className="space-y-6 sm:space-y-8">
                     {[
-                      { icon: Mail, title: "Email Us", detail: "support@webrakor.com" },
-                      { icon: Phone, title: "Call Us", detail: "+1 (555) 123-4567" },
-                      { icon: MapPin, title: "Visit Us", detail: "123 Financial District, San Francisco" }
+                      { icon: Mail, title: "Email Us", detail: "getwebrakor@gmail.com" },
+                      { icon: Phone, title: "Call Us", detail: "+91 90327 83863" },
+                      { icon: MapPin, title: "Visit Us", detail: "Secunderabad, Hyderabad" }
                     ].map((item, i) => (
                       <AnimatedSection key={i} delay={500 + i * 100}>
                         <div className="flex items-start space-x-3 sm:space-x-4">
@@ -137,7 +136,6 @@ export default function Contact() {
                         >
                           <Linkedin className="text-[#c1f174] w-5 h-5 sm:w-6 sm:h-6" />
                         </a>
-
                       </div>
                     </div>
                   </AnimatedSection>
@@ -152,7 +150,12 @@ export default function Contact() {
                     <p className="text-gray-600 mb-6 sm:mb-8 text-sm sm:text-base">We'll get back to you within 24 hours</p>
                   </AnimatedSection>
 
-                  <form className="space-y-5 sm:space-y-6">
+                  {/* Formspree integration */}
+                  <form 
+                    className="space-y-5 sm:space-y-6" 
+                    action="https://formspree.io/f/xandlyqj" 
+                    method="POST"
+                  >
                     {[
                       { id: "name", label: "Full Name", type: "text" },
                       { id: "email", label: "Email Address", type: "email" },
@@ -163,6 +166,8 @@ export default function Contact() {
                           <input
                             type={field.type}
                             id={field.id}
+                            name={field.id}
+                            required
                             className="peer h-10 sm:h-12 w-full border-b-2 border-gray-200 text-gray-900 placeholder-transparent focus:outline-none focus:border-[#c1f174]"
                             placeholder=" "
                           />
@@ -180,7 +185,9 @@ export default function Contact() {
                       <div className="relative pt-3">
                         <textarea
                           id="message"
+                          name="message"
                           rows={3}
+                          required
                           className="peer w-full border-b-2 border-gray-200 text-gray-900 placeholder-transparent focus:outline-none focus:border-[#c1f174] resize-none"
                           placeholder=" "
                         />

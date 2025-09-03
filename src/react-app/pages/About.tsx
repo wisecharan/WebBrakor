@@ -2,6 +2,7 @@ import { Linkedin, Mail } from 'lucide-react';
 import Header from '@/react-app/components/Header';
 import Footer from '@/react-app/components/Footer';
 import React, { useEffect, useRef, ReactNode } from 'react';
+import { assert } from 'console';
 
 export default function About() {
   // Animation utility
