@@ -1,12 +1,13 @@
-import { ChevronRight } from 'lucide-react';
-import { useEffect, useRef, FC, ReactNode } from 'react';
+import { Link } from "react-router-dom";
+import { ChevronRight } from "lucide-react";
+import { useEffect, useRef, FC, ReactNode } from "react";
 
 // Animation utility function
 const animateOnScroll = (element: HTMLElement | null, delay = 0) => {
   if (element) {
     element.style.transition = `opacity 600ms ease-out ${delay}ms, transform 600ms ease-out ${delay}ms`;
-    element.style.opacity = '1';
-    element.style.transform = 'translateY(0)';
+    element.style.opacity = "1";
+    element.style.transform = "translateY(0)";
   }
 };
 
@@ -19,7 +20,7 @@ const AnimatedSection: FC<AnimatedSectionProps> = ({ children, delay = 0 }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const node = ref.current; // ✅ capture once
+    const node = ref.current;
     if (!node) return;
 
     const observer = new IntersectionObserver(
@@ -45,15 +46,14 @@ const AnimatedSection: FC<AnimatedSectionProps> = ({ children, delay = 0 }) => {
       ref={ref}
       style={{
         opacity: 0,
-        transform: 'translateY(20px)',
-        willChange: 'opacity, transform',
+        transform: "translateY(20px)",
+        willChange: "opacity, transform",
       }}
     >
       {children}
     </div>
   );
 };
-
 
 export default function TestimonialsSection() {
   return (
@@ -67,7 +67,6 @@ export default function TestimonialsSection() {
 
             {/* Content */}
             <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 items-center">
-
               {/* Left side - Content */}
               <div>
                 <AnimatedSection delay={100}>
@@ -82,7 +81,9 @@ export default function TestimonialsSection() {
                 </AnimatedSection>
                 <AnimatedSection delay={300}>
                   <p className="text-gray-400 text-sm sm:text-lg leading-relaxed">
-                    Discover how Webrakor helps startups, solopreneurs, and students launch professional websites quickly with AI-powered design and human-crafted quality.
+                    Discover how Webrakor helps startups, solopreneurs, and
+                    students launch professional websites quickly with
+                    AI-powered design and human-crafted quality.
                   </p>
                 </AnimatedSection>
               </div>
@@ -110,7 +111,10 @@ export default function TestimonialsSection() {
 
                     {/* Quote */}
                     <blockquote className="text-gray-300 text-sm sm:text-lg leading-relaxed mb-4 sm:mb-6">
-                      "Webrakor allowed us to launch our website in just a few days. The combination of AI efficiency and human creativity ensured a smooth, high-quality result for our business."
+                      "Webrakor allowed us to launch our website in just a few
+                      days. The combination of AI efficiency and human
+                      creativity ensured a smooth, high-quality result for our
+                      business."
                     </blockquote>
 
                     {/* Quote mark */}
@@ -123,8 +127,8 @@ export default function TestimonialsSection() {
                 {/* Bottom CTA */}
                 <AnimatedSection delay={500}>
                   <div className="mt-6 sm:mt-8">
-                    <a
-                      href="/reviews" // or "#all-testimonials" if same page scroll
+                    <Link
+                      to="/reviews"
                       className="bg-[#c6f678] rounded-full px-2 sm:px-4 py-1.5 sm:py-2 inline-flex flex-wrap sm:flex-nowrap items-center justify-center space-x-2 sm:space-x-4 hover:bg-[#b5e46d] transition-colors cursor-pointer"
                     >
                       {/* Avatar group */}
@@ -147,9 +151,8 @@ export default function TestimonialsSection() {
 
                       {/* Icon */}
                       <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-900" />
-                    </a>
+                    </Link>
                   </div>
-
                 </AnimatedSection>
               </div>
             </div>
