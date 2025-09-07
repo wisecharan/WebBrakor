@@ -130,19 +130,24 @@ export default function Reviews() {
       <Header />
       <main className="overflow-hidden">
 
-        {/* Hero Section */}
-        <section className="relative pt-36 pb-10 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto text-center">
-            <AnimatedSection>
-              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 leading-tight mb-4">
-                Trusted by over <span className='text-[#c6f678]'>1000+</span><br /> Indian businesses and counting
-              </h1>
-            </AnimatedSection>
-            <AnimatedSection delay={100}>
-              <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-6">
-                Join businesses transforming their operations with<br /> Webrakor's AI-powered platform
-              </p>
-            </AnimatedSection>
+{/* Hero Section */}
+<section className="relative pt-32 pb-10 px-4 sm:px-6 lg:px-8">
+  <div className="max-w-7xl mx-auto text-center">
+    <AnimatedSection>
+      <p className="text-xs sm:text-sm font-semibold text-gray-500 tracking-widest uppercase mb-3">
+        Powering Growth
+      </p>
+      <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 leading-tight mb-4">
+        Trusted by over <span className='text-[#c6f678]'>1000+</span><br /> Indian businesses and counting
+      </h1>
+    </AnimatedSection>
+
+    <AnimatedSection delay={100}>
+      <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-6">
+        Join businesses transforming their operations with<br /> Webrakor's AI-powered platform
+      </p>
+    </AnimatedSection>
+
 
             <AnimatedSection delay={200}>
               <div className="flex flex-col items-center justify-center gap-5">

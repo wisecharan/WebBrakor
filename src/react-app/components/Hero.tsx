@@ -30,6 +30,9 @@ const AnimatedSection: FC<AnimatedSectionProps> = ({ children, delay = 0 }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const node = ref.current; // ✅ capture ref once
+    if (!node) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -42,14 +45,10 @@ const AnimatedSection: FC<AnimatedSectionProps> = ({ children, delay = 0 }) => {
       { threshold: 0.1 }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    observer.observe(node);
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
+      observer.unobserve(node); // ✅ always cleanup the same node
     };
   }, [delay]);
 

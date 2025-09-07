@@ -9,7 +9,6 @@ const animateOnScroll = (element: HTMLElement | null, delay: number = 0) => {
   }
 };
 
-// Component wrapper with animation
 interface AnimatedSectionProps {
   children: ReactNode;
   delay?: number;
@@ -19,6 +18,9 @@ const AnimatedSection: FC<AnimatedSectionProps> = ({ children, delay = 0 }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const node = ref.current; // ✅ capture once
+    if (!node) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -30,14 +32,10 @@ const AnimatedSection: FC<AnimatedSectionProps> = ({ children, delay = 0 }) => {
       { threshold: 0.1 }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    observer.observe(node);
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
+      observer.unobserve(node);
     };
   }, [delay]);
 
@@ -54,6 +52,7 @@ const AnimatedSection: FC<AnimatedSectionProps> = ({ children, delay = 0 }) => {
     </div>
   );
 };
+
 
 // Counter component for animated numbers
 interface CounterProps {

@@ -10,7 +10,6 @@ const animateOnScroll = (element: HTMLElement | null, delay = 0) => {
   }
 };
 
-// Component wrapper with animation
 interface AnimatedSectionProps {
   children: ReactNode;
   delay?: number;
@@ -20,6 +19,9 @@ const AnimatedSection: FC<AnimatedSectionProps> = ({ children, delay = 0 }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const node = ref.current; // ✅ capture once
+    if (!node) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -31,14 +33,10 @@ const AnimatedSection: FC<AnimatedSectionProps> = ({ children, delay = 0 }) => {
       { threshold: 0.1 }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    observer.observe(node);
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
+      observer.unobserve(node);
     };
   }, [delay]);
 
@@ -48,13 +46,14 @@ const AnimatedSection: FC<AnimatedSectionProps> = ({ children, delay = 0 }) => {
       style={{
         opacity: 0,
         transform: 'translateY(20px)',
-        willChange: 'opacity, transform'
+        willChange: 'opacity, transform',
       }}
     >
       {children}
     </div>
   );
 };
+
 
 export default function TestimonialsSection() {
   return (
@@ -124,7 +123,10 @@ export default function TestimonialsSection() {
                 {/* Bottom CTA */}
                 <AnimatedSection delay={500}>
                   <div className="mt-6 sm:mt-8">
-                    <div className="bg-[#c6f678] rounded-full px-2 sm:px-4 py-1.5 sm:py-2 inline-flex flex-wrap sm:flex-nowrap items-center justify-center space-x-2 sm:space-x-4 hover:bg-[#b5e46d] transition-colors cursor-pointer">
+                    <a
+                      href="/reviews" // or "#all-testimonials" if same page scroll
+                      className="bg-[#c6f678] rounded-full px-2 sm:px-4 py-1.5 sm:py-2 inline-flex flex-wrap sm:flex-nowrap items-center justify-center space-x-2 sm:space-x-4 hover:bg-[#b5e46d] transition-colors cursor-pointer"
+                    >
                       {/* Avatar group */}
                       <div className="flex -space-x-2 mb-1 sm:mb-0">
                         {[1, 2, 3, 4, 5].map((i) => (
@@ -145,8 +147,9 @@ export default function TestimonialsSection() {
 
                       {/* Icon */}
                       <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-900" />
-                    </div>
+                    </a>
                   </div>
+
                 </AnimatedSection>
               </div>
             </div>

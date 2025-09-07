@@ -61,7 +61,7 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Desktop Nav*/}
+          {/* Desktop Nav */}
           <div className="hidden md:flex flex-1 justify-center space-x-6">
             {navItems.map((item) => (
               <Link
@@ -77,7 +77,7 @@ export default function Header() {
             ))}
           </div>
 
-          {/* Desktop CTA - Hidden */}
+          {/* Desktop CTA */}
           <div className="hidden md:flex ml-auto">
             <Link to="/contact" onClick={handleLinkClick}>
               <button className="bg-black text-white px-3 py-1 rounded-full font-medium hover:bg-gray-800 transition-colors text-sm">
@@ -86,7 +86,7 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Mobile Hamburger Menu - Hidden  */}
+          {/* Mobile Hamburger */}
           <button
             className="md:hidden ml-auto w-10 h-8 p-1 flex items-center justify-center bg-black rounded-lg"
             onClick={() => setIsMobileMenuOpen(true)}
@@ -108,19 +108,25 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Mobile Menu - Hidden (since you only want logo) */}
+        {/* Mobile Menu Overlay */}
         <div
-          className={`fixed inset-0 z-[60] flex transition-opacity duration-300 ${
-            isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          className={`fixed inset-0 z-[60] flex ${
+            isMobileMenuOpen ? "visible" : "invisible"
           }`}
         >
+          {/* Background with fade + blur */}
           <div
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
+            className={`absolute inset-0 bg-black/60 transition-opacity duration-500 ease-in-out ${
+              isMobileMenuOpen
+                ? "opacity-100 backdrop-blur-sm"
+                : "opacity-0 backdrop-blur-none"
+            }`}
             onClick={() => setIsMobileMenuOpen(false)}
           />
+          {/* Slide-in Menu Panel */}
           <div
             ref={menuRef}
-            className={`relative ml-auto h-full w-3/4 max-w-sm bg-white p-6 shadow-xl transform transition-transform duration-300 ease-in-out z-[70] ${
+            className={`relative ml-auto h-full w-3/4 max-w-sm bg-white p-6 shadow-xl transform transition-transform duration-500 ease-in-out z-[70] ${
               isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
             }`}
           >
@@ -160,7 +166,7 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Scroll-to-top button - Keeping this as it's not part of the header */}
+      {/* Scroll-to-top button */}
       <button
         onClick={scrollToTop}
         className={`fixed bottom-6 right-6 z-50 w-10 h-10 flex items-center justify-center rounded-full bg-black text-white shadow-md hover:bg-gray-800 transition duration-300 transform

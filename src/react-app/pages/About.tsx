@@ -66,8 +66,11 @@ export default function About() {
         <div className="max-w-7xl mx-auto">
           {/* Main Page Title */}
           <AnimatedSection>
+            <p className="text-xs sm:text-sm font-semibold text-gray-500 text-center tracking-widest uppercase mb-2">
+              Behind the Rakor
+            </p>
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-center text-gray-900 mb-0 break-words">
-              Behind the Code
+              Rakor Dynamics
             </h1>
           </AnimatedSection>
 
@@ -87,13 +90,13 @@ export default function About() {
 
               <AnimatedSection delay={300}>
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-gray-900 leading-snug max-w-4xl mx-auto break-words">
-                  We craft modern, high-performance websites that elevate brands, engage audiences, and drive growth.
+                  We are building AI-powered solutions that help businesses grow, guide students in careers, and create meaningful digital impact.
                 </h1>
               </AnimatedSection>
 
               <AnimatedSection delay={400}>
                 <p className="mt-4 text-sm sm:text-base text-gray-500 px-2 sm:px-0">
-                  Join a passionate community of AI-driven creators dedicated to pushing the boundaries of innovation.
+                  Our vision is to bridge the gap between education, enterprises, and innovation <br /> through bold, simple, and effective solutions.
                 </p>
               </AnimatedSection>
             </div>
@@ -136,21 +139,21 @@ export default function About() {
           <AnimatedSection delay={300}>
             <div className="mb-16">
               <AnimatedSection delay={400}>
-                <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-10">The WebRakor Adventure</h2>
+                <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-10">The WebRakor Journey</h2>
               </AnimatedSection>
               <AnimatedSection delay={500}>
                 <p className="text-lg sm:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-10 leading-relaxed px-2 sm:px-0">
-                  From a small team of students to a leading innovator in AI web development, our journey has been fueled by a commitment to quality, speed, and client success.
+                  What started as a vision to simplify web and career building has now become a mission to shape the future of AI-powered growth and learning.
                 </p>
               </AnimatedSection>
 
               <div className="max-w-3xl mx-auto">
                 {[
-                  { year: '2021', title: 'The Vision is Born', text: 'Fueled by our frustration with slow, expensive web development, we started sketching out a new kind of platform. The vision was simple: a website builder powered by AI that could deliver high-quality results in a fraction of the time.' },
-                  { year: '2022', title: 'First AI-Powered Prototype', text: 'After months of development, we built our first functional AI prototype. The initial tests proved our concept was viable, and we began refining our AI models to generate professional, modern designs automatically.' },
-                  { year: '2023', title: 'Founding WebRakor', text: 'With a clear product vision and a growing team of engineers and designers, we officially founded WebRakor. This marked the beginning of our mission to make web creation accessible and efficient for everyone.' },
-                  { year: '2024', title: 'Launch & Early Success', text: 'We launched our platform to a select group of early adopters. Their feedback was instrumental in our success, helping us fine-tune the user experience and prove that AI could be a game-changer for businesses.' },
-                  { year: '2025', title: 'The WebRakor Standard', text: 'Today, WebRakor is a trusted partner for businesses worldwide. Our AI-powered platform continues to evolve, setting a new standard for website development that is fast, beautiful, and intelligently built for growth.' }
+                  { year: '2021', title: 'The Idea Sparks', text: 'We identified the challenges students and businesses face in technology, sparking the idea of building an AI ecosystem to bridge the gaps.' },
+                  { year: '2022', title: 'Prototyping Solutions', text: 'Early prototypes of Webrakor AI and PathFind AI were built, showing how AI can simplify project building and career guidance.' },
+                  { year: '2023', title: 'Forming Webrakor', text: 'Webrakor Pvt. Ltd. officially took shape, with a mission to deliver AI-driven business growth and career readiness tools.' },
+                  { year: '2024', title: 'Expanding Horizons', text: 'Launch of multiple AI-driven solutions helped businesses scale and students gain clarity in careers.' },
+                  { year: '2025', title: 'Towards Global Goals', text: 'Webrakor is scaling towards a global AI productivity ecosystem, bridging education, enterprises, and growth.' }
                 ].map((item, index) => (
                   <AnimatedSection key={index} delay={600 + (index * 100)}>
                     <div className="border-l-2 border-gray-200 pl-6 sm:pl-8 pb-8 relative">
@@ -174,7 +177,7 @@ export default function About() {
                 </AnimatedSection>
                 <AnimatedSection delay={800}>
                   <p className="text-base sm:text-lg text-gray-600 max-w-xl mx-auto">
-                    We are a team of creators, innovators, and problem-solvers united by a passion for building exceptional digital experiences.
+                    We are a team of innovators, engineers, and problem-solvers passionate about building AI products that transform businesses and careers.
                   </p>
                 </AnimatedSection>
               </div>
@@ -184,28 +187,28 @@ export default function About() {
                   {
                     name: 'Sai Charan Puduthala',
                     role: 'Founder & CEO',
-                    description: 'Built WebRakor to deliver top-notch websites for businesses.',
+                    description: 'Leading WebRakor with a mission to deliver AI-powered growth solutions and empower learners.',
                     img: 'https://media.licdn.com/dms/image/v2/D4D03AQF702Z9DrxliQ/profile-displayphoto-shrink_400_400/B4DZaMjmAgHQAg-/0/1746114869141?e=1758153600&v=beta&t=QtUJnB_7u8RauVTqFBmD2DkYsm9a-9mc_KJG41sQZaY',
                     social: { email: 'mailto:charans.workspace@gmail.com', linkedin: 'https://www.linkedin.com/in/wisecharan/' }
                   },
                   {
                     name: 'Omkar Sai Kshitij',
                     role: 'Co-Founder',
-                    description: 'Co-creating WebRakor’s magic, one site at a time',
+                    description: 'Focused on building WebRakor’s AI ecosystem and scaling impactful solutions.',
                     img: 'https://media.licdn.com/dms/image/v2/D5603AQGcOH9j6dV82Q/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1714571541794?e=1758153600&v=beta&t=y1r6GkZ_ARje1VaVWr2f8SCoeToDudC91kF5s4i5Eks',
                     social: { email: 'mailto:', linkedin: 'https://www.linkedin.com/in/kshitijomkar/' }
                   },
                   {
                     name: 'Rama Manikanth',
                     role: 'Chief Data Analyst',
-                    description: 'Creating impactful web solutions and empowering tech communities.',
+                    description: 'Bringing insights to life with data-driven decisions and scalable AI solutions.',
                     img: 'https://media.licdn.com/dms/image/v2/D5603AQG0t2EJOna3Sw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1728107387117?e=1758153600&v=beta&t=Gn3pPbT38DjtMVG6ZjevNVFQ7nxMSWhsfSWwBaly4Dg',
                     social: { email: 'mailto:', linkedin: 'https://www.linkedin.com/in/rmkp888/' }
                   },
                   {
                     name: 'Rohith Kandula',
                     role: 'Chief Financial Officer.',
-                    description: 'Co-Founder and CFO driving strategy, finance, and growth.',
+                    description: 'Driving WebRakor’s finance, growth, and long-term strategic vision.',
                     img: 'https://media.licdn.com/dms/image/v2/D5603AQFgsD-HFjjSRw/profile-displayphoto-shrink_400_400/B56Zb4s1p_HwAo-/0/1747929227438?e=1758153600&v=beta&t=7U6HSJPuwYDA64r2oahAhdZHMF5eyicJ3WDhZ-BezU0',
                     social: { email: 'mailto:', linkedin: 'https://www.linkedin.com/in/ksgl-rohith/' }
                   },

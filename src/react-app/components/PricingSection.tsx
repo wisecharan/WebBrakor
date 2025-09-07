@@ -18,6 +18,9 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({ children, delay = 0 }
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const node = ref.current; // ✅ capture once
+    if (!node) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -29,10 +32,10 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({ children, delay = 0 }
       { threshold: 0.1 }
     );
 
-    if (ref.current) observer.observe(ref.current);
+    observer.observe(node);
 
     return () => {
-      if (ref.current) observer.unobserve(ref.current);
+      observer.unobserve(node);
     };
   }, [delay]);
 
@@ -49,6 +52,7 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({ children, delay = 0 }
     </div>
   );
 };
+
 
 // Feature selection interface
 interface Feature {
@@ -207,10 +211,12 @@ export default function PricingSection() {
   useEffect(() => {
     const initialExpanded: Record<string, boolean> = {};
     Object.keys(featuresByCategory).forEach(category => {
-      initialExpanded[category] = false; // Changed to false to collapse by default
+      initialExpanded[category] = false; // Collapsed by default
     });
     setExpandedCategories(initialExpanded);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   return (
     <section className="py-8 px-4 sm:px-6 lg:px-8" id="pricing">
@@ -251,175 +257,167 @@ export default function PricingSection() {
           </div>
         </AnimatedSection>
 
-{/* Pricing Cards - Moved to appear first */}
-<AnimatedSection delay={100}>
-  <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">Predefined Packages</h2>
-  <p className="text-sm sm:text-lg text-gray-600 text-center max-w-2xl mx-auto mb-8">
-    Select exactly the features you need. Watch your custom package price update in real-time.
-  </p>
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-4xl mx-auto mb-16">
-    {plans.map((plan, index) => (
-      <AnimatedSection key={index} delay={index * 100}>
-        <div
-          className={`relative rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition-all ${
-            plan.popular
-              ? 'border-[#c6f678] bg-black text-[#c6f678] shadow-lg transform scale-[1.02]'
-              : 'border-gray-200 bg-white hover:border-gray-300'
-          }`}
-        >
-          {/* Popular Badge */}
-          {plan.popular && (
-            <div className="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2">
-              <span className="bg-[#c6f678] text-black px-4 sm:px-5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold tracking-wide">
-                MOST POPULAR
-              </span>
-            </div>
-          )}
+        {/* Pricing Cards - Moved to appear first */}
+        <AnimatedSection delay={100}>
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">Predefined Packages</h2>
+          <p className="text-sm sm:text-lg text-gray-600 text-center max-w-2xl mx-auto mb-8">
+            Select exactly the features you need. Watch your custom package price update in real-time.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-4xl mx-auto mb-16">
+            {plans.map((plan, index) => (
+              <AnimatedSection key={index} delay={index * 100}>
+                <div
+                  className={`relative rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition-all ${plan.popular
+                    ? 'border-[#c6f678] bg-black text-[#c6f678] shadow-lg transform scale-[1.02]'
+                    : 'border-gray-200 bg-white hover:border-gray-300'
+                    }`}
+                >
+                  {/* Popular Badge */}
+                  {plan.popular && (
+                    <div className="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2">
+                      <span className="bg-[#c6f678] text-black px-4 sm:px-5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold tracking-wide">
+                        MOST POPULAR
+                      </span>
+                    </div>
+                  )}
 
-          {/* Plan Header */}
-          <div className="mb-8">
-            <h3
-              className={`text-sm font-bold tracking-widest uppercase mb-4 ${
-                plan.popular ? 'text-[#c6f678]' : 'text-gray-500'
-              }`}
-            >
-              {plan.name}
-            </h3>
-            <div className="flex items-baseline mb-4">
-              <span className="text-4xl sm:text-5xl font-bold">{formatPrice(plan.price)}</span>
-            </div>
-            <p className={`text-sm leading-relaxed ${plan.popular ? 'text-[#c6f678]/90' : 'text-gray-600'}`}>
-              {plan.description}
+                  {/* Plan Header */}
+                  <div className="mb-8">
+                    <h3
+                      className={`text-sm font-bold tracking-widest uppercase mb-4 ${plan.popular ? 'text-[#c6f678]' : 'text-gray-500'
+                        }`}
+                    >
+                      {plan.name}
+                    </h3>
+                    <div className="flex items-baseline mb-4">
+                      <span className="text-4xl sm:text-5xl font-bold">{formatPrice(plan.price)}</span>
+                    </div>
+                    <p className={`text-sm leading-relaxed ${plan.popular ? 'text-[#c6f678]/90' : 'text-gray-600'}`}>
+                      {plan.description}
+                    </p>
+                  </div>
+
+                  {/* Features */}
+                  <div className="mb-8">
+                    <ul className="space-y-4">
+                      {plan.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-start">
+                          {feature.included ? (
+                            <Check
+                              className={`w-5 h-5 sm:w-6 sm:h-6 mr-3 mt-0.5 flex-shrink-0 ${plan.popular ? 'text-[#c6f678]' : 'text-[#a3e635]'
+                                }`}
+                            />
+                          ) : (
+                            <X
+                              className={`w-5 h-5 sm:w-6 sm:h-6 mr-3 mt-0.5 flex-shrink-0 ${plan.popular ? 'text-gray-500' : 'text-gray-400'
+                                }`}
+                            />
+                          )}
+                          <span
+                            className={`text-sm ${feature.included
+                              ? plan.popular
+                                ? 'text-[#c6f678]'
+                                : 'text-gray-900'
+                              : plan.popular
+                                ? 'text-gray-500'
+                                : 'text-gray-400'
+                              }`}
+                          >
+                            {feature.name}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* CTA Button */}
+                  <button
+                    className={`w-full py-3.5 rounded-lg font-semibold transition-all duration-200 text-sm ${plan.popular
+                      ? 'bg-[#c6f678] text-black hover:bg-[#b8f566] hover:shadow-md'
+                      : 'bg-black text-white hover:bg-gray-800 hover:shadow-md'
+                      }`}
+                  >
+                    {plan.cta}
+                  </button>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </AnimatedSection>
+
+        {/* Custom Package Section Title */}
+        <AnimatedSection delay={200}>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">
+              Custom Package
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Select exactly the features you need. Watch your custom package price update in real-time.
             </p>
           </div>
+        </AnimatedSection>
 
-          {/* Features */}
-          <div className="mb-8">
-            <ul className="space-y-4">
-              {plan.features.map((feature, featureIndex) => (
-                <li key={featureIndex} className="flex items-start">
-                  {feature.included ? (
-                    <Check
-                      className={`w-5 h-5 sm:w-6 sm:h-6 mr-3 mt-0.5 flex-shrink-0 ${
-                        plan.popular ? 'text-[#c6f678]' : 'text-[#a3e635]'
-                      }`}
-                    />
-                  ) : (
-                    <X
-                      className={`w-5 h-5 sm:w-6 sm:h-6 mr-3 mt-0.5 flex-shrink-0 ${
-                        plan.popular ? 'text-gray-500' : 'text-gray-400'
-                      }`}
-                    />
-                  )}
-                  <span
-                    className={`text-sm ${
-                      feature.included
-                        ? plan.popular
-                          ? 'text-[#c6f678]'
-                          : 'text-gray-900'
-                        : plan.popular
-                        ? 'text-gray-500'
-                        : 'text-gray-400'
-                    }`}
-                  >
-                    {feature.name}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Custom Feature Selection */}
+        <AnimatedSection delay={300}>
+          <div className="mb-16">
+            <div className="flex flex-col lg:flex-row gap-8">
+              {/* Feature Selection */}
+              <div className="lg:w-2/3">
+                <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
+                  {Object.entries(featuresByCategory).map(([category, features]) => (
+                    <div key={category} className="border-b border-gray-100 last:border-b-0">
+                      <button
+                        onClick={() => toggleCategory(category)}
+                        className="w-full px-6 py-5 flex justify-between items-center hover:bg-gray-50 transition-colors group"
+                      >
+                        <h3 className="text-lg font-semibold text-gray-900">{category}</h3>
+                        {expandedCategories[category] ? (
+                          <Minus className="w-5 h-5 text-gray-500" />
+                        ) : (
+                          <Plus className="w-5 h-5 text-gray-500" />
+                        )}
+                      </button>
 
-          {/* CTA Button */}
-          <button
-            className={`w-full py-3.5 rounded-lg font-semibold transition-all duration-200 text-sm ${
-              plan.popular 
-                ? 'bg-[#c6f678] text-black hover:bg-[#b8f566] hover:shadow-md' 
-                : 'bg-black text-white hover:bg-gray-800 hover:shadow-md'
-            }`}
-          >
-            {plan.cta}
-          </button>
-        </div>
-      </AnimatedSection>
-    ))}
-  </div>
-</AnimatedSection>
-
-       {/* Custom Package Section Title */}
-<AnimatedSection delay={200}>
-  <div className="text-center mb-12">
-    <h2 className="text-3xl font-bold text-gray-900 mb-3">
-      Custom Package
-    </h2>
-    <p className="text-gray-600 max-w-2xl mx-auto">
-      Select exactly the features you need. Watch your custom package price update in real-time.
-    </p>
-  </div>
-</AnimatedSection>
-
-{/* Custom Feature Selection */}
-<AnimatedSection delay={300}>
-  <div className="mb-16">
-    <div className="flex flex-col lg:flex-row gap-8">
-      {/* Feature Selection */}
-      <div className="lg:w-2/3">
-        <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
-          {Object.entries(featuresByCategory).map(([category, features]) => (
-            <div key={category} className="border-b border-gray-100 last:border-b-0">
-              <button
-                onClick={() => toggleCategory(category)}
-                className="w-full px-6 py-5 flex justify-between items-center hover:bg-gray-50 transition-colors group"
-              >
-                <h3 className="text-lg font-semibold text-gray-900">{category}</h3>
-                {expandedCategories[category] ? (
-                  <Minus className="w-5 h-5 text-gray-500" />
-                ) : (
-                  <Plus className="w-5 h-5 text-gray-500" />
-                )}
-              </button>
-              
-              {expandedCategories[category] && (
-                <div className="px-6 pb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {features.map(feature => (
-                    <div
-                      key={feature.id}
-                      className={`p-5 rounded-lg border cursor-pointer transition-all ${
-                        selectedFeatures[feature.id]
-                          ? 'border-[#c6f678] bg-[#c6f678]/5'
-                          : 'border-gray-100 hover:border-gray-200'
-                      }`}
-                      onClick={() => toggleFeature(feature.id)}
-                    >
-                      <div className="flex items-start justify-between mb-3">
-                        <h4 className="font-medium text-gray-900">{feature.name}</h4>
-                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center flex-shrink-0 ml-3 ${
-                          selectedFeatures[feature.id]
-                            ? 'bg-[#c6f678] border-[#c6f678]'
-                            : 'border-gray-300'
-                        }`}>
-                          {selectedFeatures[feature.id] && (
-                            <Check className="w-3 h-3 text-black" />
-                          )}
+                      {expandedCategories[category] && (
+                        <div className="px-6 pb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {features.map(feature => (
+                            <div
+                              key={feature.id}
+                              className={`p-5 rounded-lg border cursor-pointer transition-all ${selectedFeatures[feature.id]
+                                ? 'border-[#c6f678] bg-[#c6f678]/5'
+                                : 'border-gray-100 hover:border-gray-200'
+                                }`}
+                              onClick={() => toggleFeature(feature.id)}
+                            >
+                              <div className="flex items-start justify-between mb-3">
+                                <h4 className="font-medium text-gray-900">{feature.name}</h4>
+                                <div className={`w-5 h-5 rounded-full border flex items-center justify-center flex-shrink-0 ml-3 ${selectedFeatures[feature.id]
+                                  ? 'bg-[#c6f678] border-[#c6f678]'
+                                  : 'border-gray-300'
+                                  }`}>
+                                  {selectedFeatures[feature.id] && (
+                                    <Check className="w-3 h-3 text-black" />
+                                  )}
+                                </div>
+                              </div>
+                              <p className="text-sm text-gray-600 mb-3">{feature.description}</p>
+                              <p className="text-sm font-semibold text-gray-900">
+                                {formatPrice(feature.basePrice)}
+                              </p>
+                            </div>
+                          ))}
                         </div>
-                      </div>
-                      <p className="text-sm text-gray-600 mb-3">{feature.description}</p>
-                      <p className="text-sm font-semibold text-gray-900">
-                        {formatPrice(feature.basePrice)}
-                      </p>
+                      )}
                     </div>
                   ))}
                 </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
+              </div>
 
               {/* Summary Panel */}
               <div className="md:w-1/3">
                 <div className="sticky top-[100px] bg-black text-[#c6f678] p-6 rounded-2xl">
                   <h3 className="text-xl font-bold mb-4">Your Custom Package</h3>
-                  
+
                   <div className="mb-6">
                     <h4 className="text-sm uppercase font-semibold mb-3 text-gray-400">Selected Features</h4>
                     {allFeatures.filter(f => selectedFeatures[f.id]).length === 0 ? (
@@ -438,15 +436,15 @@ export default function PricingSection() {
                       </ul>
                     )}
                   </div>
-                  
+
                   <div className="border-t border-gray-800 pt-4 mb-6">
                     <div className="flex justify-between items-center font-bold text-lg">
                       <span>Total</span>
                       <span>{formatPrice(calculateTotal())}</span>
                     </div>
                   </div>
-                  
-                  <button 
+
+                  <button
                     onClick={handleRequestQuote}
                     className="w-full bg-[#c6f678] text-black py-3 rounded-lg font-semibold hover:bg-[#b8f566] transition-colors"
                   >
