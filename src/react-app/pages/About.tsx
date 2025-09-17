@@ -81,7 +81,7 @@ export default function About() {
               <AnimatedSection delay={200}>
                 <div className="flex justify-center mb-4">
                   <div className="flex -space-x-3">
-                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQF702Z9DrxliQ/profile-displayphoto-shrink_400_400/B4DZaMjmAgHQAg-/0/1746114869141?e=1758153600&v=beta&t=QtUJnB_7u8RauVTqFBmD2DkYsm9a-9mc_KJG41sQZaY" alt="Profile 1" className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-white object-cover max-w-full h-auto" />
+                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQHzDwotULny0w/profile-displayphoto-shrink_400_400/B4DZlOgLWIJkAg-/0/1757958683936?e=1761177600&v=beta&t=C25gC4zQ7JCItHKvPhTLf2UV3gfoG8aWsJ-nlD0rarg" alt="Profile 1" className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-white object-cover max-w-full h-auto" />
                     <img src="https://media.licdn.com/dms/image/v2/D5603AQG0t2EJOna3Sw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1728107387117?e=1758153600&v=beta&t=Gn3pPbT38DjtMVG6ZjevNVFQ7nxMSWhsfSWwBaly4Dg" alt="Profile 2" className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-white object-cover max-w-full h-auto" />
                     <img src="https://media.licdn.com/dms/image/v2/D5603AQFgsD-HFjjSRw/profile-displayphoto-shrink_400_400/B56Zb4s1p_HwAo-/0/1747929227438?e=1758153600&v=beta&t=7U6HSJPuwYDA64r2oahAhdZHMF5eyicJ3WDhZ-BezU0" alt="Profile 3" className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-white object-cover max-w-full h-auto" />
                   </div>
@@ -188,14 +188,14 @@ export default function About() {
                     name: 'Sai Charan Puduthala',
                     role: 'Founder & CEO',
                     description: 'Leading WebRakor with a mission to deliver AI-powered growth solutions and empower learners.',
-                    img: 'https://media.licdn.com/dms/image/v2/D4D03AQF702Z9DrxliQ/profile-displayphoto-shrink_400_400/B4DZaMjmAgHQAg-/0/1746114869141?e=1758153600&v=beta&t=QtUJnB_7u8RauVTqFBmD2DkYsm9a-9mc_KJG41sQZaY',
+                    img: 'https://media.licdn.com/dms/image/v2/D4D03AQHzDwotULny0w/profile-displayphoto-shrink_400_400/B4DZlOgLWIJkAg-/0/1757958683936?e=1761177600&v=beta&t=C25gC4zQ7JCItHKvPhTLf2UV3gfoG8aWsJ-nlD0rarg',
                     social: { email: 'mailto:charans.workspace@gmail.com', linkedin: 'https://www.linkedin.com/in/wisecharan/' }
                   },
                   {
                     name: 'Omkar Sai Kshitij',
                     role: 'Co-Founder',
                     description: 'Focused on building WebRakor’s AI ecosystem and scaling impactful solutions.',
-                    img: 'https://media.licdn.com/dms/image/v2/D5603AQGcOH9j6dV82Q/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1714571541794?e=1758153600&v=beta&t=y1r6GkZ_ARje1VaVWr2f8SCoeToDudC91kF5s4i5Eks',
+                    img: 'https://media.licdn.com/dms/image/v2/D5603AQFcUPbSHdXlvA/profile-displayphoto-scale_400_400/B56Zk8__kSHkAg-/0/1757665034623?e=1761177600&v=beta&t=iMsk5tkSfBbRcCppbd0Z1lYJY8FxDt1setBrydK2-nY',
                     social: { email: 'mailto:', linkedin: 'https://www.linkedin.com/in/kshitijomkar/' }
                   },
                   {

@@ -95,7 +95,7 @@ export default function TestimonialsSection() {
                     {/* Profile */}
                     <div className="flex flex-wrap sm:flex-nowrap items-center mb-4 sm:mb-6">
                       <img
-                        src="https://media.licdn.com/dms/image/v2/D4D03AQF702Z9DrxliQ/profile-displayphoto-shrink_200_200/B4DZaMjmAgHQAY-/0/1746114869141?e=2147483647&v=beta&t=xWvft4y3zJGJk2VujtFiZf8dQQ3IR_YW8B0vqe_BjvI"
+                        src="https://media.licdn.com/dms/image/v2/D4D03AQHzDwotULny0w/profile-displayphoto-shrink_400_400/B4DZlOgLWIJkAg-/0/1757958683936?e=1761177600&v=beta&t=C25gC4zQ7JCItHKvPhTLf2UV3gfoG8aWsJ-nlD0rarg"
                         alt="Sai Charan Puduthala"
                         className="w-14 h-14 sm:w-16 sm:h-16 rounded-full mr-3 sm:mr-4 flex-shrink-0"
                       />
